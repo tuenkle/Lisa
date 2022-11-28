@@ -38,7 +38,8 @@ class LisaDaughter(discord.Client):
                     else:
                         try:
                             voice_client = await message.author.voice.channel.connect()
-                        except:
+                        except Exception as e:
+                            print(e)
                             await message.channel.send('유저가 보이스 채널에 접속 중이지 않습니다.')
                             return
                     try:

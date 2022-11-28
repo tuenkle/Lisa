@@ -5,12 +5,10 @@ from dotenv import load_dotenv
 class LisaDaughter(discord.Client):
     async def on_ready(self):
         print({self.user})
-
     async def on_message(self, message):
         if message.author == client.user:
             return
-
-        if message.content.startswith('$'):
+        if message.content.startswith('$') or message.content.startswith("!"):
             striped_message = message.content[1:].lstrip()
             if striped_message.startswith('노래'):
                 striped_message = striped_message[2:].lstrip()
@@ -24,13 +22,16 @@ class LisaDaughter(discord.Client):
                                 'outtmpl': 'song/temp'}
                     try:
                         os.remove('song/temp')
-                    except:
-                        pass
+                    except Exception as e:
+                        print(e)
+                        await message.channel.send('무언가 잘못된 것 같습니다.')
+                        return
                     try:
                         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                             song_info = ydl.download(url)
                             print(song_info)
-                    except:
+                    except Exception as e:
+                        print(e)
                         await message.channel.send('유효한 주소가 아니거나 다운에 오류가 생겼습니다.')
                         return
                     if client.voice_clients:

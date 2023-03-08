@@ -4,3 +4,4 @@ song/temp
 logs
 application.yml
 output.png
+__pycache__

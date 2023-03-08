@@ -1,3 +1,5 @@
 .env
 song/temp
 !song/.gitkeep
+logs
+application.yml

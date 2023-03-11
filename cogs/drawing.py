@@ -6,7 +6,7 @@ import requests
 import io
 import base64
 from PIL import Image, PngImagePlugin
-
+import os
 from datetime import datetime
 class Drawing(commands.Cog):  # create a class for our cog that inherits from commands.Cog
     # this class is used to create a cog, which is a module that can be added to the bot
@@ -29,7 +29,7 @@ class Drawing(commands.Cog):  # create a class for our cog that inherits from co
                 return
         print(긍정프롬)
         print(부정프롬)
-        url = "http://60.108.208.33:50001"
+        url = os.getenv("DRAWING_API_IP")
         payload = {
             "denoising_strength": 0.5,
             "prompt": 긍정프롬,

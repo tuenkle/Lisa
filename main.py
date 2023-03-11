@@ -25,7 +25,7 @@ async def connect_nodes():
 
 @bot.event
 async def on_wavelink_node_ready(node: wavelink.Node):
-    print(f"{node.identifier} is ready.")  # print a message
+    print(f"{node.identifier} is ready.")
 
 
 @bot.slash_command()
@@ -34,7 +34,7 @@ async def 안녕(ctx):
 
 
 for cog in os.listdir("cogs"):
-    if cog.endswith('.py'):
+    if cog.endswith('.py') and cog != "utils.py":
         bot.load_extension(f"cogs.{cog[:-3]}")
 
 

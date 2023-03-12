@@ -2,10 +2,9 @@ import discord
 from discord.ext import commands
 import wavelink
 
-class Music(commands.Cog):  # create a class for our cog that inherits from commands.Cog
-    # this class is used to create a cog, which is a module that can be added to the bot
+class Music(commands.Cog):
 
-    def __init__(self, bot):  # this is a special method that is called when the cog is loaded
+    def __init__(self, bot):
         self.bot = bot
 
     @discord.slash_command(description="노래를 중지합니다.")
@@ -20,21 +19,21 @@ class Music(commands.Cog):  # create a class for our cog that inherits from comm
 
     @discord.slash_command(description="노래를 재생합니다.")
     async def 재생(self, ctx, search: str):
-        vc = ctx.voice_client  # define our voice client
+        vc = ctx.voice_client
 
-        if not vc:  # check if the bot is not in a voice channel
-            vc = await ctx.author.voice.channel.connect(cls=wavelink.Player)  # connect to the voice channel
+        if not vc:
+            vc = await ctx.author.voice.channel.connect(cls=wavelink.Player)
         if ctx.author.voice is None:
             return await ctx.respond("You must be in the voice channel.")
-        if ctx.author.voice.channel.id != vc.channel.id:  # check if the bot is not in the voice channel
-            return await ctx.respond("You must be in the same voice channel as the bot.")  # return an error message
-        song = await wavelink.YouTubeTrack.search(query=search, return_first=True)  # search for the song
+        if ctx.author.voice.channel.id != vc.channel.id:
+            return await ctx.respond("You must be in the same voice channel as the bot.")
+        song = await wavelink.YouTubeTrack.search(query=search, return_first=True)
 
         if not song:  # check if the song is not found
-            return await ctx.respond("No song found.")  # return an error message
+            return await ctx.respond("No song found.")
 
         await vc.play(song)  # play the song
-        await ctx.respond(f"Now playing: `{vc.source.title}`")  # return a message
+        await ctx.respond(f"Now playing: `{vc.source.title}`") 
 
 def setup(bot):
     bot.add_cog(Music(bot))

@@ -8,12 +8,9 @@ import base64
 from PIL import Image, PngImagePlugin
 import os
 from datetime import datetime
-class Drawing(commands.Cog):  # create a class for our cog that inherits from commands.Cog
-    # this class is used to create a cog, which is a module that can be added to the bot
-
-    def __init__(self, bot):  # this is a special method that is called when the cog is loaded
+class Drawing(commands.Cog):
+    def __init__(self, bot):
         self.bot = bot
-
     @discord.slash_command(description="긍정프롬에는 원하는 내용을, 부정프롬에는 지양하는 내용을 적어주세요.")
     async def 그림(self, ctx, 긍정프롬: discord.Option(str) = "", 부정프롬: discord.Option(str) = ""):
         await ctx.respond("그림을 그리는 중...")

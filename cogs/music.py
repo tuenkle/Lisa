@@ -8,8 +8,8 @@ class Music(commands.Cog):  # create a class for our cog that inherits from comm
     def __init__(self, bot):  # this is a special method that is called when the cog is loaded
         self.bot = bot
 
-    @discord.slash_command(name="stop", description="stop song")
-    async def stop(self, ctx):
+    @discord.slash_command(description="노래를 중지합니다.")
+    async def 중지(self, ctx):
         vc = ctx.voice_client
 
         if not vc:
@@ -18,8 +18,8 @@ class Music(commands.Cog):  # create a class for our cog that inherits from comm
         await vc.disconnect()
         await ctx.respond("End playing the song.")
 
-    @discord.slash_command(name="play", description="play song")
-    async def play(self, ctx, search: str):
+    @discord.slash_command(description="노래를 재생합니다.")
+    async def 재생(self, ctx, search: str):
         vc = ctx.voice_client  # define our voice client
 
         if not vc:  # check if the bot is not in a voice channel

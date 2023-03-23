@@ -29,7 +29,7 @@ class Music(commands.Cog):
             return await ctx.respond("You must be in the same voice channel as the bot.")
         song = await wavelink.YouTubeTrack.search(query=search, return_first=True)
 
-        if not song: 
+        if not song:
             return await ctx.respond("No song found.")
 
         await vc.play(song)
